@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive demo of SmartShop's grocery recommendation system featuring natural language search and intelligent product suggestions.">
+    <meta name="keywords" content="grocery recommendations demo, NLP search, interactive grocery list, machine learning demo">
+    <meta name="author" content="yss107">
+    <title>SmartShop Demo - Interactive Grocery Recommendations</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: lightslategray;
+            background-image: url('./assets/grocery-shop-safely.jpg');
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .navbar .icons {
+            display: flex;
+        }
+        .navbar .icons a {
+            padding: 0 10px;
+        }
+        .navbar .icons i {
+            font-size: 20px;
+            color: #f2f2f2;
+        }
+        .navbar .icons i:hover {
+            color: black;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin: 2rem 0;
+        }
+        .main {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            gap: 20px;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .w-1-2 {
+            width: 48%;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .search-btn {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .search-btn:hover {
+            background-color: #45a049;
+        }
+        .results-container {
+            min-height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: white;
+        }
+        .product-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .product-item:hover {
+            background-color: #f5f5f5;
+        }
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        .grocery-list {
+            min-height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: white;
+        }
+        .grocery-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .grocery-item:last-child {
+            border-bottom: none;
+        }
+        .remove-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 2px 6px;
+            cursor: pointer;
+        }
+        .demo-note {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .action-buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .action-btn:hover {
+            background-color: #45a049;
+        }
+        .back-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            z-index: 1001;
+        }
+        .back-link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+    
+    <div class="navbar">
+        <div>
+            <a class="text-4xl" href="index.html">SmartShop</a>
+            <a href="demo.html">Demo</a>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#about">About</a>
+        </div>
+        <div class="icons">
+            <a href="#"><i class="fa fa-search"></i></a>
+            <a href="#"><i class="fa fa-user"></i></a>
+            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+    </div>
+
+    <h1>SmartShop Demo - Interactive Interface</h1>
+
+    <div class="demo-note">
+        <strong>Demo Mode:</strong> This is a static demonstration of the SmartShop interface. 
+        In the full application, the search would connect to machine learning models for real-time recommendations. 
+        <a href="https://github.com/yss107/SmartShops.github.io" target="_blank">View the full Flask application on GitHub</a>.
+    </div>
+
+    <div class="main">
+        <div class="container w-1-2">
+            <h2>🔍 Natural Language Search</h2>
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Enter product keywords (e.g., 'healthy breakfast options', 'quick dinner ingredients')">
+                <button class="search-btn" onclick="performSearch()">Get Recommendations</button>
+            </div>
+            
+            <h3>📦 Recommended Products</h3>
+            <div class="results-container" id="resultsContainer">
+                <p style="color: #666; text-align: center; margin: 50px 0;">
+                    Enter search terms above to see personalized grocery recommendations
+                </p>
+            </div>
+        </div>
+
+        <div class="container w-1-2">
+            <h2>🛒 Your Grocery List</h2>
+            <div class="grocery-list" id="groceryList">
+                <p style="color: #666; text-align: center; margin: 50px 0;" id="emptyMessage">
+                    Your grocery list is empty. Add items from the recommendations!
+                </p>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn" onclick="saveGroceryList()">
+                    <i class="fa fa-save"></i> Save List
+                </button>
+                <button class="action-btn" onclick="downloadCSV()">
+                    <i class="fa fa-download"></i> Download CSV
+                </button>
+                <button class="action-btn" onclick="printList()">
+                    <i class="fa fa-print"></i> Print List
+                </button>
+                <button class="action-btn" onclick="clearList()" style="background-color: #ff4444;">
+                    <i class="fa fa-trash"></i> Clear List
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo data for different search terms
+        const demoData = {
+            'breakfast': [
+                'Organic Steel Cut Oats',
+                'Free Range Eggs (Dozen)',
+                'Greek Vanilla Yogurt',
+                'Fresh Blueberries',
+                'Whole Grain Bread',
+                'Almond Butter',
+                'Organic Milk (1 Gallon)'
+            ],
+            'healthy': [
+                'Organic Baby Spinach',
+                'Quinoa (1 lb)',
+                'Wild Caught Salmon Fillet',
+                'Avocados (4 pack)',
+                'Organic Chickpeas',
+                'Extra Virgin Olive Oil',
+                'Sweet Potatoes'
+            ],
+            'dinner': [
+                'Boneless Chicken Breast',
+                'Brown Rice (2 lb)',
+                'Fresh Broccoli',
+                'Yellow Onions (3 lb)',
+                'Garlic Bulbs',
+                'Organic Pasta',
+                'Marinara Sauce'
+            ],
+            'snack': [
+                'Mixed Nuts (Unsalted)',
+                'Dark Chocolate (70% Cocoa)',
+                'Apple Slices',
+                'String Cheese',
+                'Hummus',
+                'Baby Carrots',
+                'Granola Bars'
+            ],
+            'fruit': [
+                'Organic Bananas',
+                'Honeycrisp Apples',
+                'Fresh Strawberries',
+                'Oranges (5 lb)',
+                'Grapes (Seedless)',
+                'Pineapple',
+                'Lemons'
+            ]
+        };
+
+        let groceryList = [];
+
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('resultsContainer');
+            
+            if (!searchTerm.trim()) {
+                resultsContainer.innerHTML = '<p style="color: #666; text-align: center; margin: 50px 0;">Please enter a search term</p>';
+                return;
+            }
+
+            // Find matching demo data
+            let results = [];
+            for (const [key, products] of Object.entries(demoData)) {
+                if (searchTerm.includes(key)) {
+                    results = products;
+                    break;
+                }
+            }
+
+            // Default results if no specific match
+            if (results.length === 0) {
+                results = [
+                    'Organic Mixed Vegetables',
+                    'Whole Wheat Bread',
+                    'Low-Fat Milk',
+                    'Fresh Herbs',
+                    'Lean Ground Turkey'
+                ];
+            }
+
+            // Display results
+            let html = '';
+            results.forEach(product => {
+                html += `<div class="product-item" onclick="addToGroceryList('${product}')">
+                    <strong>${product}</strong>
+                    <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Click to add to grocery list
+                    </div>
+                </div>`;
+            });
+
+            resultsContainer.innerHTML = html;
+        }
+
+        function addToGroceryList(productName) {
+            if (!groceryList.find(item => item.name === productName)) {
+                groceryList.push({
+                    name: productName,
+                    count: 1
+                });
+                updateGroceryListDisplay();
+                
+                // Show success message
+                showMessage('✅ Added to grocery list: ' + productName);
+            } else {
+                // Increment count if already exists
+                const item = groceryList.find(item => item.name === productName);
+                item.count++;
+                updateGroceryListDisplay();
+                showMessage('📈 Increased quantity: ' + productName);
+            }
+        }
+
+        function updateGroceryListDisplay() {
+            const groceryListContainer = document.getElementById('groceryList');
+            const emptyMessage = document.getElementById('emptyMessage');
+            
+            if (groceryList.length === 0) {
+                emptyMessage.style.display = 'block';
+                groceryListContainer.innerHTML = '<p style="color: #666; text-align: center; margin: 50px 0;" id="emptyMessage">Your grocery list is empty. Add items from the recommendations!</p>';
+                return;
+            }
+
+            let html = '';
+            groceryList.forEach((item, index) => {
+                html += `<div class="grocery-item">
+                    <span><strong>${item.name}</strong> (x${item.count})</span>
+                    <div>
+                        <button onclick="changeQuantity(${index}, -1)" style="background-color: #ffa726; color: white; border: none; border-radius: 3px; padding: 2px 6px; margin-right: 5px;">-</button>
+                        <button onclick="changeQuantity(${index}, 1)" style="background-color: #4CAF50; color: white; border: none; border-radius: 3px; padding: 2px 6px; margin-right: 5px;">+</button>
+                        <button class="remove-btn" onclick="removeFromGroceryList(${index})">×</button>
+                    </div>
+                </div>`;
+            });
+
+            groceryListContainer.innerHTML = html;
+        }
+
+        function changeQuantity(index, delta) {
+            groceryList[index].count += delta;
+            if (groceryList[index].count <= 0) {
+                groceryList.splice(index, 1);
+            }
+            updateGroceryListDisplay();
+        }
+
+        function removeFromGroceryList(index) {
+            const removedItem = groceryList[index];
+            groceryList.splice(index, 1);
+            updateGroceryListDisplay();
+            showMessage('🗑️ Removed: ' + removedItem.name);
+        }
+
+        function saveGroceryList() {
+            if (groceryList.length === 0) {
+                showMessage('❌ Your grocery list is empty');
+                return;
+            }
+            localStorage.setItem('smartshop_grocery_list', JSON.stringify(groceryList));
+            showMessage('💾 Grocery list saved to browser storage');
+        }
+
+        function downloadCSV() {
+            if (groceryList.length === 0) {
+                showMessage('❌ Your grocery list is empty');
+                return;
+            }
+
+            let csv = 'Item,Quantity\n';
+            groceryList.forEach(item => {
+                csv += `"${item.name}",${item.count}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'smartshop_grocery_list.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+            showMessage('📥 Grocery list downloaded as CSV');
+        }
+
+        function printList() {
+            if (groceryList.length === 0) {
+                showMessage('❌ Your grocery list is empty');
+                return;
+            }
+
+            let printContent = 'SmartShop Grocery List\n';
+            printContent += '======================\n\n';
+            groceryList.forEach((item, index) => {
+                printContent += `${index + 1}. ${item.name} (x${item.count})\n`;
+            });
+            printContent += '\nGenerated by SmartShop - Personalized Grocery Recommendations';
+
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>SmartShop Grocery List</title></head><body>');
+            printWindow.document.write('<pre>' + printContent + '</pre>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+            showMessage('🖨️ Opening print dialog...');
+        }
+
+        function clearList() {
+            if (groceryList.length === 0) {
+                showMessage('❌ Your grocery list is already empty');
+                return;
+            }
+            groceryList = [];
+            updateGroceryListDisplay();
+            showMessage('🧹 Grocery list cleared');
+        }
+
+        function showMessage(message) {
+            // Create a temporary message element
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background-color: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 1002;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(messageDiv);
+                }, 300);
+            }, 3000);
+        }
+
+        // Load saved grocery list on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const saved = localStorage.getItem('smartshop_grocery_list');
+            if (saved) {
+                groceryList = JSON.parse(saved);
+                updateGroceryListDisplay();
+            }
+        });
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); }
+                to { transform: translateX(0); }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); }
+                to { transform: translateX(100%); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
