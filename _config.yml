@@ -1,0 +1,43 @@
+# GitHub Pages Configuration for SmartShops.github.io
+title: "SmartShop: Personalized Grocery Item Recommendation System"
+description: "A machine learning-powered web application that provides personalized grocery recommendations using Natural Language Processing (NLP) and collaborative filtering techniques."
+url: "https://yss107.github.io"
+baseurl: "/SmartShops.github.io"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Exclude files from build
+exclude:
+  - flask_app/
+  - Pickle/
+  - "*.ipynb"
+  - "*.db"
+  - "*.csv"
+  - requirements.txt
+  - archive (24)/
+  - README.md
+
+# Include files
+include:
+  - assets/
+  - style.css
+  - demo.html
+
+# SEO and metadata
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Site metadata
+author: yss107
+github_username: yss107
+
+# Social links
+social:
+  name: SmartShop
+  links:
+    - https://github.com/yss107/SmartShops.github.io

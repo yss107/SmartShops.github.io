@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartShop: Personalized Grocery Item Recommendation System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a class="text-4xl" href="#home">SmartShop</a>
+            <a href="#features">Features</a>
+            <a href="#demo">Demo</a>
+            <a href="#about">About</a>
+            <a href="https://github.com/yss107/SmartShops.github.io" target="_blank">GitHub</a>
+        </div>
+        <div class="icons">
+            <a href="#"><i class="fa fa-search"></i></a>
+            <a href="#"><i class="fa fa-user"></i></a>
+            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>SmartShop</h1>
+            <p class="hero-subtitle">Personalized Grocery Item Recommendation System</p>
+            <p class="hero-description">
+                A machine learning-powered web application that provides personalized grocery recommendations 
+                using Natural Language Processing (NLP) and collaborative filtering techniques.
+            </p>
+            <div class="hero-buttons">
+                <a href="#demo" class="btn btn-primary">View Demo</a>
+                <a href="https://github.com/yss107/SmartShops.github.io" class="btn btn-secondary" target="_blank">
+                    <i class="fa fa-github"></i> View on GitHub
+                </a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="assets/app-screenshot.jpg" alt="SmartShop Application Interface" class="screenshot">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fa fa-brain feature-icon"></i>
+                    <h3>Natural Language Processing</h3>
+                    <p>Search for groceries using natural language. The system understands your queries and provides relevant recommendations.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa fa-users feature-icon"></i>
+                    <h3>Collaborative Filtering</h3>
+                    <p>Get recommendations based on user behavior patterns and preferences using advanced SVD algorithms.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa fa-shopping-basket feature-icon"></i>
+                    <h3>Market Basket Analysis</h3>
+                    <p>Discover products that are frequently bought together using association rules and market basket analysis.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa fa-cogs feature-icon"></i>
+                    <h3>Diversity Control</h3>
+                    <p>Balance between popular items and niche products with adjustable diversity controls.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa fa-list feature-icon"></i>
+                    <h3>Interactive Grocery Lists</h3>
+                    <p>Create, manage, and export your grocery lists with real-time updates and CSV export functionality.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa fa-mobile feature-icon"></i>
+                    <h3>Responsive Design</h3>
+                    <p>Mobile-friendly interface that works seamlessly across all devices and screen sizes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <h2>Application Demo</h2>
+            <div class="demo-content">
+                <div class="demo-image">
+                    <img src="https://github.com/user-attachments/assets/e877cc52-99a9-4c49-932f-0190e18acd62" alt="SmartShop Interface" class="demo-screenshot">
+                    <p class="demo-caption">The SmartShop web interface featuring natural language search and interactive grocery list management</p>
+                </div>
+                <div class="demo-features">
+                    <h3>Try SmartShop Features:</h3>
+                    <ul>
+                        <li><strong>Natural Language Search:</strong> Type "healthy breakfast options" or "quick dinner ingredients"</li>
+                        <li><strong>Product Recommendations:</strong> Get suggestions based on your search and preferences</li>
+                        <li><strong>Grocery List Management:</strong> Add, remove, and organize your shopping list</li>
+                        <li><strong>Export Options:</strong> Download your list as CSV or print it</li>
+                    </ul>
+                    <div class="tech-note">
+                        <p><strong>Note:</strong> The full interactive application requires a Python Flask server. 
+                        This GitHub Pages site showcases the project. To run the complete application locally, 
+                        follow the installation instructions in the repository.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <h2>Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <h3>Frontend</h3>
+                    <ul>
+                        <li>HTML5 & CSS3</li>
+                        <li>JavaScript</li>
+                        <li>TailwindCSS</li>
+                        <li>PureCSS</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>Flask (Python)</li>
+                        <li>SQLite Database</li>
+                        <li>RESTful APIs</li>
+                        <li>Session Management</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3>Machine Learning</h3>
+                    <ul>
+                        <li>Scikit-learn</li>
+                        <li>Scikit-surprise (SVD)</li>
+                        <li>NLTK</li>
+                        <li>Pandas & NumPy</li>
+                    </ul>
+                </div>
+                <div class="tech-category">
+                    <h3>Data Processing</h3>
+                    <ul>
+                        <li>Cosine Similarity</li>
+                        <li>TF-IDF Vectorization</li>
+                        <li>Text Stemming</li>
+                        <li>Association Rules</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About the Project</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        SmartShop is an intelligent grocery recommendation system that combines multiple machine learning 
+                        approaches to provide accurate and diverse product suggestions. The system analyzes user preferences, 
+                        shopping patterns, and product relationships to deliver personalized recommendations.
+                    </p>
+                    <h3>Key Algorithms:</h3>
+                    <ul>
+                        <li><strong>SVD (Singular Value Decomposition):</strong> For collaborative filtering and user-item matrix factorization</li>
+                        <li><strong>TF-IDF & Cosine Similarity:</strong> For content-based product matching</li>
+                        <li><strong>Market Basket Analysis:</strong> For discovering product associations</li>
+                        <li><strong>Diversity Algorithms:</strong> For balancing popular and niche recommendations</li>
+                    </ul>
+                    <h3>Dataset:</h3>
+                    <ul>
+                        <li>49,000+ unique grocery items</li>
+                        <li>134 product categories (aisles)</li>
+                        <li>21 major departments</li>
+                        <li>Historical transaction patterns</li>
+                    </ul>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-number">49K+</span>
+                        <span class="stat-label">Products</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">134</span>
+                        <span class="stat-label">Categories</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">21</span>
+                        <span class="stat-label">Departments</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">ML</span>
+                        <span class="stat-label">Powered</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2>Getting Started</h2>
+            <div class="install-content">
+                <div class="install-steps">
+                    <h3>Prerequisites</h3>
+                    <ul>
+                        <li>Python 3.12 or higher</li>
+                        <li>pip package manager</li>
+                    </ul>
+                    
+                    <h3>Installation Steps</h3>
+                    <div class="code-block">
+                        <h4>1. Clone the repository</h4>
+                        <code>
+git clone https://github.com/yss107/SmartShops.github.io.git<br>
+cd SmartShops.github.io
+                        </code>
+                    </div>
+                    
+                    <div class="code-block">
+                        <h4>2. Install dependencies</h4>
+                        <code>
+pip install -r requirements.txt<br>
+# If scikit-surprise fails:<br>
+conda install -c conda-forge scikit-surprise
+                        </code>
+                    </div>
+                    
+                    <div class="code-block">
+                        <h4>3. Download NLTK data</h4>
+                        <code>
+python -c "import nltk; nltk.download('punkt')"
+                        </code>
+                    </div>
+                    
+                    <div class="code-block">
+                        <h4>4. Run the application</h4>
+                        <code>
+cd flask_app<br>
+python app.py
+                        </code>
+                    </div>
+                    
+                    <div class="code-block">
+                        <h4>5. Access the application</h4>
+                        <code>
+Open browser: http://localhost:5000
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>SmartShop</h3>
+                    <p>Intelligent grocery recommendations powered by machine learning.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links</h3>
+                    <ul>
+                        <li><a href="https://github.com/yss107/SmartShops.github.io" target="_blank">GitHub Repository</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#demo">Demo</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Technologies</h3>
+                    <ul>
+                        <li>Flask & Python</li>
+                        <li>Machine Learning</li>
+                        <li>Natural Language Processing</li>
+                        <li>Collaborative Filtering</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SmartShop. Available for educational and research purposes.</p>
+                <p>Developed by <a href="https://github.com/yss107" target="_blank">yss107</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
