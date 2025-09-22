@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Natural Language Grocery Recommender</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+    <style>
+        h1 {
+            text-align: left;
+            padding-left: 100px;
+        }
+        body {
+            background-color: lightslategray;
+            background-image: url('/static/grocery-shop-safely.jpg');
+        }
+        .main {
+            padding-left: 100px;
+            padding-right: 100px;
+            text-align: left;
+            display: flex;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .navbar .icons {
+            display: flex;
+        }
+        .navbar .icons a {
+            padding: 0 10px;
+        }
+        .navbar .icons i {
+            font-size: 20px;
+            color: #f2f2f2;
+        }
+        .navbar .icons i:hover {
+            color: black;
+        } 
+         
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="navbar mb-80">
+        <div>
+            <a href="{{ url_for('dashboard') }}">SmarShop</a>
+            <a href="{{ url_for('nlppage') }}">Home</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </div>
+        <div class="icons">
+            <a href="#"><i class="fa fa-search"></i></a>
+            <a href="#"><i class="fa fa-user"></i></a>
+            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+    </div>
+    <div class='main flex items-center justify-center'>
+        <!-- Image container -->
+        <div class="image-container">
+            <img src="\static\Screenshot 2024-05-20 230721-Photoroom.png-Photoroom.jpg" alt="Grocery Shop Safely" class="max-w-full h-auto">
+        </div>
+    </div> 
+    
+    <div class='main flex items-center justify-center'>
+        <!-- Button container -->
+        <div class="button-container">
+            <form class="pure-form" method="POST" action="/nlp">
+                <button type="submit" class="pure-button w-56 h-20 pure-button-primary px-5 py-3 font-bold rounded-full text-2xl mx-auto block">Enter</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    
+</body>
+</html>

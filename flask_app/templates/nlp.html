@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartShop: Personalized Grocery Item Recommendation System
+    </title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: lightslategray;
+            background-image: url('/static/grocery-shop-safely.jpg');
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .navbar .icons {
+            display: flex;
+        }
+        .navbar .icons a {
+            padding: 0 10px;
+        }
+        .navbar .icons i {
+            font-size: 20px;
+            color: #f2f2f2;
+        }
+        .navbar .icons i:hover {
+            color: black;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        .main {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .container, .grocery-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            width: 45%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .container form, .grocery-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .grocery-container {
+            position: relative;
+        }
+        #groceryList {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        .grocery-item {
+            position: relative;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .remove-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: rgb(36, 214, 57);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+        .index-column {
+            width: 20px;
+        }
+        .product-column {
+            flex-grow: 1;
+            margin: 0 10px;
+        }
+        .count-column {
+            width: 50px;
+            text-align: center;
+        }  
+        button {
+    border: none; /* Remove border */
+    padding: 15px 32px; /* Add padding */
+    text-align: center; /* Center text */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px; /* Add margin */
+    cursor: pointer;
+    border-radius: 12px; /* Add border radius for rounded shape */
+    background-color: #4CAF50; /* Unique background color */
+    color: white; /* Text color */
+}
+
+
+        
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <a class="text-4xl" href="{{ url_for('dashboard') }}">SmartShop</a>
+            <a href="{{ url_for('nlppage') }}">Home</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </div>
+        <div class="icons">
+            <a href="#"><i class="fa fa-search"></i></a>
+            <a href="#"><i class="fa fa-user"></i></a>
+            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+    </div>
+    <h1></h1>
+    <div class="main">
+        <div class="container w-1/2">
+            <form id="searchForm">
+                <input class="p-3" type="text" id="searchWords" name="search_words" placeholder="Enter product keywords">
+                <button class="px-3 py-2 rounded-xl hover:bg-gray-200 w-fit" type="submit">Get Recommendations</button>
+            </form>
+            <form id="recommendationForm" style="display:none;">
+                <select id="recommendationDropdown" size="5">
+                </select>
+                <button type="button" id="addToGroceryListButton" style="display:none;">Add to Grocery List</button>
+            </form>
+            <button class="px-3 py-2 rounded-xl hover:bg-gray-300 w-fit"  id="updateListButton" style="display:none;">Update Recommendation List</button>
+        </div>
+        <div class="grocery-container">
+            <h2 class="px-3 py-2">Your Grocery List</h2>
+            <div id="groceryList"></div>
+            <form id="addOwnProductForm">
+                <input class="p-3" type="text" id="ownProductInput" placeholder="Add your own product">
+                <button class="px-3 py-2 rounded-xl hover:bg-gray-300" type="submit">Add Item</button>
+            </form>
+            <div style="margin-top: 15px;" class="border-t-2">
+                <button class="px-3 py-3 rounded-xl hover:bg-gray-300" id="saveButton">Save Grocery List</button>
+                <button class="px-3 py-3 rounded-xl hover:bg-gray-300" id="download">Download Excel</button>
+                <button class="px-3 py-3 rounded-xl hover:bg-gray-300" id="print">Print</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var productList = {}; // Object to store products and their counts
+
+            $('#searchForm').submit(function(event){
+                event.preventDefault();
+                var searchWords = $('#searchWords').val();
+                $.ajax({
+                    url: '/get_recommendations',
+                    data: {'search_words': searchWords},
+                    type: 'POST',
+                    success: function(response){
+                        var productNames = response.product_names;
+                        var dropdown = $('#recommendationDropdown');
+                        dropdown.empty();
+                        for(var i = 0; i < productNames.length; i++) {
+                            dropdown.append('<option value="' + productNames[i] + '">' + productNames[i] + '</option>');
+                        }
+                        $('#recommendationForm').show();
+                        $('#updateListButton').show();
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+            });
+
+            $('#updateListButton').click(function(){
+                var selectedProduct = $('#recommendationDropdown option:selected').val();
+                $.ajax({
+                    url: '/update_recommendations',
+                    data: {'selected_product': selectedProduct},
+                    type: 'POST',
+                    success: function(response){
+                        var productNames = response.product_names;
+                        var dropdown = $('#recommendationDropdown');
+                        dropdown.empty();
+                        for(var i = 0; i < productNames.length; i++) {
+                            dropdown.append('<option value="' + productNames[i] + '">' + productNames[i] + '</option>');
+                        }
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+            });
+
+            $('#recommendationDropdown').on('dblclick', 'option', function(){
+                var selectedProduct = $(this).val();
+                if (selectedProduct) {
+                    addProductToList(selectedProduct);
+                }
+            });
+            
+            $('#addOwnProductForm').submit(function(event){
+                event.preventDefault();
+                var ownProduct = $('#ownProductInput').val();
+                if (ownProduct) {
+                    addProductToList(ownProduct);
+                    $('#ownProductInput').val('');
+                }
+            });
+
+            $(document).on('click', '.remove-btn', function(){
+                var product = $(this).closest('.grocery-item').find('.product-column').text();
+                removeProductFromList(product);
+                $(this).closest('.grocery-item').remove();
+            });
+
+            function addProductToList(product) {
+                if (productList.hasOwnProperty(product)) {
+                    productList[product]++;
+                } else {
+                    productList[product] = 1;
+                }
+                updateGroceryList();
+            }
+
+            function removeProductFromList(product) {
+                if (productList.hasOwnProperty(product)) {
+                    if (productList[product] > 1) {
+                        productList[product]--;
+                    } else {
+                        delete productList[product];
+                    }
+                    updateGroceryList();
+                }
+            }
+
+            function updateGroceryList() {
+    var groceryList = $('#groceryList');
+    groceryList.empty();
+    var index = 1;
+    for (var product in productList) {
+        if (productList.hasOwnProperty(product)) {
+            var chipHTML = '<div class="chip-container">' +
+                                '<div class="grocery-item">' +
+                                    '<span class="index-column">' + index + '</span>' +
+                                    '<span class="product-column">' + product + '</span>' +
+                                    '<span class="count-column">' + productList[product] + '</span>' +
+                                    '<button class="remove-btn text-center">x</button>' +
+                                '</div>' +
+                            '</div>';
+            groceryList.append(chipHTML);
+            index++;
+        }
+    }
+}
+
+
+            function saveGroceryList() {
+                var groceryListItems = $('#groceryList').html();
+                document.cookie = "groceryList=" + encodeURIComponent(groceryListItems);
+                alert("Grocery list saved!");
+            }
+
+            function downloadExcel() {
+                var csvContent = "data:text/csv;charset=utf-8,";
+                csvContent += "Index,Product,Count\n";
+                var index = 1;
+                for (var product in productList) {
+                    if (productList.hasOwnProperty(product)) {
+                        csvContent += index + "," + product + "," + productList[product] + "\n";
+                        index++;
+                    }
+                }
+                var encodedUri = encodeURI(csvContent);
+                var link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "grocery_list.csv");
+                document.body.appendChild(link);
+                link.click();
+            }
+
+            function printGroceryList() {
+    var printableContent = "Index\tProduct\tCount\n"; // Using tabs as separators
+
+    var index = 1;
+    for (var product in productList) {
+        if (productList.hasOwnProperty(product)) {
+            printableContent += index + "\t" + product + "\t" + productList[product] + "\n";
+            index++;
+        }
+    }
+
+    // Create a hidden iframe to print the content
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('style', 'position:absolute;width:0px;height:0px;left:-500px;top:-500px;');
+    document.body.appendChild(iframe);
+    var doc = iframe.contentWindow.document;
+    doc.write('<pre>' + printableContent + '</pre>');
+    doc.close();
+
+    // Print the content
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+
+    // Remove the iframe from the DOM after printing
+    setTimeout(function() {
+        document.body.removeChild(iframe);
+    }, 1000); // Adjust delay as needed
+}
+
+
+            document.getElementById("download").addEventListener("click", downloadExcel);
+            document.getElementById("print").addEventListener("click", printGroceryList);
+            document.getElementById('saveButton').addEventListener('click', saveGroceryList);
+        });
+    </script>
+</body>
+</html>
