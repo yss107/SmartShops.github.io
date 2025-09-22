@@ -18,5 +18,4 @@ nltk>=3.6.0
 matplotlib>=3.4.0
 seaborn>=0.11.0
 
-# Additional utilities
-pickle5>=0.0.11  # for pickle compatibility
+# Additional utilities - removed pickle5 as Python 3.12+ includes modern pickle

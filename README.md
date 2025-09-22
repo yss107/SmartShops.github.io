@@ -1,6 +1,30 @@
 # SmartShop: Personalized Grocery Item Recommendation System
 
-A machine learning-powered web application that provides personalized grocery recommendations using Natural Language Processing (NLP) and collaborative filtering techniques.
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-blue.svg)](https://yss107.github.io/SmartShops.github.io)
+[![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-2.0%2B-green.svg)](https://flask.palletsprojects.com/)
+[![License](https://img.shields.io/badge/License-Educational-yellow.svg)](LICENSE)
+
+A machine learning-powered web application that provides personalized grocery recommendations using Natural Language Processing (NLP) and collaborative filtering techniques. This repository contains both the full Flask application and a GitHub Pages deployment showcasing the project.
+
+## 📋 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Features](#-features)
+- [Live Demo](#-live-demo)
+- [Project Structure](#-project-structure)
+- [Technology Stack](#-technology-stack)
+- [Getting Started](#-getting-started)
+- [Quick Start Example](#-quick-start-example)
+- [Usage Guide](#-usage-guide)
+- [Machine Learning Models](#-machine-learning-models)
+- [Data Sources](#-data-sources)
+- [Configuration](#-configuration)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Authors](#-authors)
+- [Contact](#-contact)
 
 ## 🎯 Project Overview
 
@@ -9,6 +33,20 @@ SmartShop is an intelligent grocery recommendation system that helps users disco
 ![SmartShop Application Interface](https://github.com/user-attachments/assets/e877cc52-99a9-4c49-932f-0190e18acd62)
 
 *The SmartShop web interface featuring natural language search and interactive grocery list management*
+
+## 🌐 Live Demo
+
+Experience SmartShop directly in your browser! The project is deployed on GitHub Pages with a interactive demo:
+
+🔗 **[Visit Live Demo](https://yss107.github.io/SmartShops.github.io)**
+
+The GitHub Pages version includes:
+- Interactive product search simulation
+- Grocery list management features
+- Responsive design for all devices
+- Export functionality (CSV, print)
+
+> **Note**: For the full machine learning experience with real-time recommendations, follow the [installation instructions](#-getting-started) to run the Flask application locally.
 
 ## ✨ Features
 
@@ -42,20 +80,28 @@ SmartShop is an intelligent grocery recommendation system that helps users disco
 
 ```
 SmartShops.github.io/
-├── flask_app/                          # Main web application
+├── 📁 flask_app/                      # Main web application
 │   ├── app.py                         # Flask application routes
 │   ├── user_functions.py              # ML recommendation functions
 │   ├── templates/                     # HTML templates
 │   │   ├── index.html                # Landing page
-│   │   └── nlp.html                  # Main recommendation interface
+│   │   ├── nlp.html                  # Main recommendation interface
+│   │   ├── svd.html                  # Collaborative filtering page
+│   │   └── rating.html               # Product rating interface
 │   └── static/                       # CSS, images, and static files
-├── Capstone_Project.ipynb            # Main analysis and EDA notebook
-├── Clustering_and_NLP.ipynb          # User clustering and NLP implementation
-├── Market_Basket_Analysis.ipynb      # Association rules and market basket analysis
-├── Pickle/                           # Serialized ML models and preprocessed data
-├── grocery.db                        # SQLite database with product data
-├── new_df.csv                       # Processed dataset
-└── archive (24)/                    # Additional datasets (aisles.csv, departments.csv)
+├── 📄 index.html                      # GitHub Pages homepage
+├── 📄 demo.html                       # Interactive demo page
+├── 📄 style.css                       # GitHub Pages stylesheet
+├── 📁 assets/                         # Static assets for GitHub Pages
+├── 📊 Capstone_Project.ipynb          # Main analysis and EDA notebook
+├── 📊 Clustering_and_NLP.ipynb        # User clustering and NLP implementation
+├── 📊 Market_Basket_Analysis.ipynb    # Association rules and market basket analysis
+├── 📁 Pickle/                         # Serialized ML models and preprocessed data
+├── 🗄️ grocery.db                      # SQLite database with product data
+├── 📄 new_df.csv                      # Processed dataset
+├── 📄 requirements.txt                # Python dependencies
+├── 📄 _config.yml                     # Jekyll configuration for GitHub Pages
+└── 📁 archive (24)/                   # Additional datasets (aisles.csv, departments.csv)
 ```
 
 ## 🛠️ Technology Stack
@@ -84,10 +130,15 @@ SmartShops.github.io/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.12 or higher
-- pip package manager
+
+Before you begin, ensure you have the following installed:
+- **Python 3.12 or higher** - [Download Python](https://www.python.org/downloads/)
+- **pip package manager** - Usually comes with Python
+- **Git** - [Download Git](https://git-scm.com/downloads)
 
 ### Installation
+
+Follow these steps to set up SmartShop locally:
 
 1. **Clone the repository**
    ```bash
@@ -95,7 +146,18 @@ SmartShops.github.io/
    cd SmartShops.github.io
    ```
 
-2. **Install required packages**
+2. **Create a virtual environment** (recommended)
+   ```bash
+   # Windows
+   python -m venv smartshop_env
+   smartshop_env\Scripts\activate
+   
+   # macOS/Linux
+   python3 -m venv smartshop_env
+   source smartshop_env/bin/activate
+   ```
+
+3. **Install required packages**
    ```bash
    pip install -r requirements.txt
    ```
@@ -105,19 +167,25 @@ SmartShops.github.io/
    conda install -c conda-forge scikit-surprise
    ```
 
-3. **Download NLTK data** (required for NLP features)
+4. **Download NLTK data** (required for NLP features)
    ```python
    python -c "import nltk; nltk.download('punkt')"
    ```
 
-4. **Run the application**
+5. **Run the application**
    ```bash
    cd flask_app
    python app.py
    ```
 
-5. **Access the application**
+6. **Access the application**
    - Open your browser and navigate to `http://localhost:5000`
+   - You should see the SmartShop interface ready to use!
+
+### Alternative: GitHub Pages Demo
+
+If you want to quickly explore the interface without local setup, visit our GitHub Pages demo:
+- 🔗 **[https://yss107.github.io/SmartShops.github.io](https://yss107.github.io/SmartShops.github.io)**
 
 ## 💡 Quick Start Example
 
@@ -251,11 +319,61 @@ python app.py
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+We welcome contributions from the community! Here's how you can help improve SmartShop:
+
+### How to Contribute
+
+1. **Fork the repository**
+   ```bash
+   git clone https://github.com/your-username/SmartShops.github.io.git
+   ```
+
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+
+3. **Make your changes**
+   - Follow the existing code style
+   - Add comments for complex functionality
+   - Update documentation if needed
+
+4. **Test your changes**
+   ```bash
+   cd flask_app
+   python app.py
+   ```
+
+5. **Commit your changes**
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+
+6. **Push to the branch**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+
+7. **Open a Pull Request**
+   - Provide a clear description of your changes
+   - Include screenshots for UI changes
+   - Reference any related issues
+
+### Areas for Contribution
+
+- 🔍 **Algorithm improvements**: Enhance recommendation accuracy
+- 🎨 **UI/UX enhancements**: Improve user interface and experience
+- 📊 **Data processing**: Optimize data handling and preprocessing
+- 🧪 **Testing**: Add unit tests and integration tests
+- 📚 **Documentation**: Improve README, code comments, and guides
+- 🐛 **Bug fixes**: Report and fix issues
+
+### Code Style Guidelines
+
+- Use meaningful variable names
+- Follow PEP 8 for Python code
+- Add docstrings for functions and classes
+- Keep functions focused and modular
 
 ## 📝 License
 
@@ -276,6 +394,17 @@ This project is available for educational and research purposes. Please respect 
 
 ## 📞 Contact
 
-For questions, suggestions, or collaboration opportunities, please open an issue on GitHub.
+We'd love to hear from you! Get in touch through any of these channels:
+
+- 🐛 **Issues & Bug Reports**: [GitHub Issues](https://github.com/yss107/SmartShops.github.io/issues)
+- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yss107/SmartShops.github.io/discussions)
+- 👨‍💻 **Developer**: [@yss107](https://github.com/yss107)
+- 🌐 **Live Demo**: [SmartShop GitHub Pages](https://yss107.github.io/SmartShops.github.io)
+
+For questions, suggestions, or collaboration opportunities, please open an issue on GitHub or start a discussion.
+
+---
 
 **Happy Shopping with SmartShop! 🛍️**
+
+*Made with ❤️ for the community | Educational & Research Purposes*
