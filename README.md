@@ -381,7 +381,7 @@ This project is available for educational and research purposes. Please respect 
 
 ## 👥 Authors
 
-- **yss107** - Project Lead and Developer
+- **yss107 aka Yash kumar ** - Project Lead and Developer
 
 ## 🙏 Acknowledgments
 
