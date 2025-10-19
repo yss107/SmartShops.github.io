@@ -19,3 +19,6 @@ matplotlib>=3.4.0
 seaborn>=0.11.0
 
 # Additional utilities - removed pickle5 as Python 3.12+ includes modern pickle
+
+# HNSW for approximate nearest neighbor search and clustering
+hnswlib>=0.7.0
