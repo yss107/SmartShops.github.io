@@ -126,6 +126,7 @@ SmartShops.github.io/
 - **SVD (Singular Value Decomposition)** - Collaborative filtering
 - **Snowball Stemmer** - Text preprocessing
 - **K-Means Clustering** - User segmentation
+- **HNSW (Hierarchical Navigable Small World)** - Fast approximate nearest neighbor search and clustering
 
 ## 🚀 Getting Started
 
@@ -242,7 +243,7 @@ Here's how to get personalized grocery recommendations in just a few steps:
 ### 3. Market Basket Analysis
 - **Association Rules**: Frequent itemset mining
 - **Support & Confidence**: Statistical measures for product associations
-- **User Clustering**: K-means segmentation based on purchase patterns
+- **User Clustering**: K-means and HNSW-based segmentation of purchase patterns
 
 ## 📊 Data Sources
 
